@@ -1,0 +1,469 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
+
+    <!-- for searchable dropdowns -->
+    <link rel="stylesheet" href="https://cdn.rawgit.com/infostreams/bootstrap-select/fd227d46de2afed300d97fd0962de80fa71afb3b/dist/css/bootstrap-select.min.css" />
+
+
+    <style>
+    body .container {
+      width: 35em;
+    }
+    .balance-card {
+      width: 35em;
+      /*min-width: 550px;*/
+      margin: .5em auto;
+    }
+    .balance-card .card-block {
+      display: flex;
+      justify-content: space-evenly;
+      font-family: "Roboto";
+    }
+    .balance-card .card-block div {
+      /*width: 90%;
+      margin: auto 1em;*/
+    }
+    .balance-card .eth-address {
+      margin: .5em auto;
+      font-family: "Roboto Mono";
+    }
+    .balance-card-logo {
+      margin: auto 0;
+      text-align: center;
+    }
+    .balance-card-logo img {
+      height: 4em;
+    }
+    .eth-qr {
+      margin: auto .5em;
+    }
+    .eth-address {}
+
+    #qrModal {
+      width: 300px;
+      height: auto;
+      margin: auto;
+    }
+    #qrModal .modal-body {
+      text-align: center;
+    }
+    #summary {
+      display: flex;
+      justify-content: space-evenly;
+      margin: 2em auto 0 auto;
+      text-align: center;
+    }
+    #summary div {
+      margin: 0 0 0 2em;
+    }
+    .controls {
+    }
+    .controls button {
+      font-size: .8em;
+      padding: .2em .5em;
+    }
+    .dropdown-menu {
+      font-size: 1em;
+    }
+
+    .exchangeSummary {
+      /*display: flex;
+      justify-content: space-around;*/
+    }
+
+    .exchangeSummary small, .exchangeSummary select {
+      font-size: .8rem;
+      display: inline;
+    }
+    .exchangeSummary select {
+      height: 1.4em;
+      line-height: 1em;
+    }
+
+    </style>
+  </head>
+  <body>
+
+    <div class="modal fade" id="qrModal" aria-labelledby="qrModalLabel" tabindex="-1" role="dialog" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="qrModalLabel">Full-Size QR</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div id="qrModalImage"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container">
+
+      <div id="summary">
+        <h1><span id="ethTotal">--.-----</span> &#926;</h1>
+        <div class="exchangeSummary">
+          <h3>
+            <span id="exchangeTotal">----.--</span><br />
+            <small id="exchangePrice">@ ----/ETH</small>
+            <select class="controls" id="currencies">
+              <option class="currency-button" value="BTC">BTC</option>
+              <option disabled>&#9472;&#9472;&#9472;</option>
+              <option class="currency-button" value="AUD">AUD</option>
+              <option class="currency-button" value="CAD">CAD</option>
+              <option class="currency-button" value="CHF">CHF</option>
+              <option class="currency-button" value="CNY">CNY</option>
+              <option class="currency-button" value="EUR">EUR</option>
+              <option class="currency-button" value="GBP">GBP</option>
+              <option class="currency-button" value="INR">INR</option>
+              <option class="currency-button" value="RUB">RUB</option>
+              <option class="currency-button" value="USD">USD</option>
+              <option disabled>&#9472;&#9472;&#9472;</option>
+              <option class="currency-button" value="AED">AED</option>
+              <option class="currency-button" value="AFN">AFN</option>
+              <option class="currency-button" value="ALL">ALL</option>
+              <option class="currency-button" value="AMD">AMD</option>
+              <option class="currency-button" value="ANG">ANG</option>
+              <option class="currency-button" value="AOA">AOA</option>
+              <option class="currency-button" value="ARS">ARS</option>
+              <option class="currency-button" value="AWG">AWG</option>
+              <option class="currency-button" value="AZN">AZN</option>
+              <option class="currency-button" value="BAM">BAM</option>
+              <option class="currency-button" value="BBD">BBD</option>
+              <option class="currency-button" value="BDT">BDT</option>
+              <option class="currency-button" value="BGN">BGN</option>
+              <option class="currency-button" value="BHD">BHD</option>
+              <option class="currency-button" value="BIF">BIF</option>
+              <option class="currency-button" value="BMD">BMD</option>
+              <option class="currency-button" value="BND">BND</option>
+              <option class="currency-button" value="BOB">BOB</option>
+              <option class="currency-button" value="BRL">BRL</option>
+              <option class="currency-button" value="BSD">BSD</option>
+              <option class="currency-button" value="BTN">BTN</option>
+              <option class="currency-button" value="BWP">BWP</option>
+              <option class="currency-button" value="BYN">BYN</option>
+              <option class="currency-button" value="BYR">BYR</option>
+              <option class="currency-button" value="BZD">BZD</option>
+              <option class="currency-button" value="CDF">CDF</option>
+              <option class="currency-button" value="CLF">CLF</option>
+              <option class="currency-button" value="CLP">CLP</option>
+              <option class="currency-button" value="CNH">CNH</option>
+              <option class="currency-button" value="COP">COP</option>
+              <option class="currency-button" value="CRC">CRC</option>
+              <option class="currency-button" value="CUC">CUC</option>
+              <option class="currency-button" value="CVE">CVE</option>
+              <option class="currency-button" value="CZK">CZK</option>
+              <option class="currency-button" value="DJF">DJF</option>
+              <option class="currency-button" value="DKK">DKK</option>
+              <option class="currency-button" value="DOP">DOP</option>
+              <option class="currency-button" value="DZD">DZD</option>
+              <option class="currency-button" value="EEK">EEK</option>
+              <option class="currency-button" value="EGP">EGP</option>
+              <option class="currency-button" value="ERN">ERN</option>
+              <option class="currency-button" value="ETB">ETB</option>
+              <option class="currency-button" value="FJD">FJD</option>
+              <option class="currency-button" value="FKP">FKP</option>
+              <option class="currency-button" value="GEL">GEL</option>
+              <option class="currency-button" value="GGP">GGP</option>
+              <option class="currency-button" value="GHS">GHS</option>
+              <option class="currency-button" value="GIP">GIP</option>
+              <option class="currency-button" value="GMD">GMD</option>
+              <option class="currency-button" value="GNF">GNF</option>
+              <option class="currency-button" value="GTQ">GTQ</option>
+              <option class="currency-button" value="GYD">GYD</option>
+              <option class="currency-button" value="HKD">HKD</option>
+              <option class="currency-button" value="HNL">HNL</option>
+              <option class="currency-button" value="HRK">HRK</option>
+              <option class="currency-button" value="HTG">HTG</option>
+              <option class="currency-button" value="HUF">HUF</option>
+              <option class="currency-button" value="IDR">IDR</option>
+              <option class="currency-button" value="ILS">ILS</option>
+              <option class="currency-button" value="IMP">IMP</option>
+              <option class="currency-button" value="IQD">IQD</option>
+              <option class="currency-button" value="ISK">ISK</option>
+              <option class="currency-button" value="JEP">JEP</option>
+              <option class="currency-button" value="JMD">JMD</option>
+              <option class="currency-button" value="JOD">JOD</option>
+              <option class="currency-button" value="JPY">JPY</option>
+              <option class="currency-button" value="KES">KES</option>
+              <option class="currency-button" value="KGS">KGS</option>
+              <option class="currency-button" value="KHR">KHR</option>
+              <option class="currency-button" value="KMF">KMF</option>
+              <option class="currency-button" value="KRW">KRW</option>
+              <option class="currency-button" value="KWD">KWD</option>
+              <option class="currency-button" value="KYD">KYD</option>
+              <option class="currency-button" value="KZT">KZT</option>
+              <option class="currency-button" value="LAK">LAK</option>
+              <option class="currency-button" value="LBP">LBP</option>
+              <option class="currency-button" value="LKR">LKR</option>
+              <option class="currency-button" value="LRD">LRD</option>
+              <option class="currency-button" value="LSL">LSL</option>
+              <option class="currency-button" value="LTL">LTL</option>
+              <option class="currency-button" value="LVL">LVL</option>
+              <option class="currency-button" value="LYD">LYD</option>
+              <option class="currency-button" value="MAD">MAD</option>
+              <option class="currency-button" value="MDL">MDL</option>
+              <option class="currency-button" value="MGA">MGA</option>
+              <option class="currency-button" value="MKD">MKD</option>
+              <option class="currency-button" value="MMK">MMK</option>
+              <option class="currency-button" value="MNT">MNT</option>
+              <option class="currency-button" value="MOP">MOP</option>
+              <option class="currency-button" value="MRO">MRO</option>
+              <option class="currency-button" value="MTL">MTL</option>
+              <option class="currency-button" value="MUR">MUR</option>
+              <option class="currency-button" value="MVR">MVR</option>
+              <option class="currency-button" value="MWK">MWK</option>
+              <option class="currency-button" value="MXN">MXN</option>
+              <option class="currency-button" value="MYR">MYR</option>
+              <option class="currency-button" value="MZN">MZN</option>
+              <option class="currency-button" value="NAD">NAD</option>
+              <option class="currency-button" value="NGN">NGN</option>
+              <option class="currency-button" value="NIO">NIO</option>
+              <option class="currency-button" value="NOK">NOK</option>
+              <option class="currency-button" value="NPR">NPR</option>
+              <option class="currency-button" value="NZD">NZD</option>
+              <option class="currency-button" value="OMR">OMR</option>
+              <option class="currency-button" value="PAB">PAB</option>
+              <option class="currency-button" value="PEN">PEN</option>
+              <option class="currency-button" value="PGK">PGK</option>
+              <option class="currency-button" value="PHP">PHP</option>
+              <option class="currency-button" value="PKR">PKR</option>
+              <option class="currency-button" value="PLN">PLN</option>
+              <option class="currency-button" value="PYG">PYG</option>
+              <option class="currency-button" value="QAR">QAR</option>
+              <option class="currency-button" value="RON">RON</option>
+              <option class="currency-button" value="RSD">RSD</option>
+              <option class="currency-button" value="RWF">RWF</option>
+              <option class="currency-button" value="SAR">SAR</option>
+              <option class="currency-button" value="SBD">SBD</option>
+              <option class="currency-button" value="SCR">SCR</option>
+              <option class="currency-button" value="SEK">SEK</option>
+              <option class="currency-button" value="SGD">SGD</option>
+              <option class="currency-button" value="SHP">SHP</option>
+              <option class="currency-button" value="SLL">SLL</option>
+              <option class="currency-button" value="SOS">SOS</option>
+              <option class="currency-button" value="SRD">SRD</option>
+              <option class="currency-button" value="SSP">SSP</option>
+              <option class="currency-button" value="STD">STD</option>
+              <option class="currency-button" value="SVC">SVC</option>
+              <option class="currency-button" value="SZL">SZL</option>
+              <option class="currency-button" value="THB">THB</option>
+              <option class="currency-button" value="TJS">TJS</option>
+              <option class="currency-button" value="TMT">TMT</option>
+              <option class="currency-button" value="TND">TND</option>
+              <option class="currency-button" value="TOP">TOP</option>
+              <option class="currency-button" value="TRY">TRY</option>
+              <option class="currency-button" value="TTD">TTD</option>
+              <option class="currency-button" value="TWD">TWD</option>
+              <option class="currency-button" value="TZS">TZS</option>
+              <option class="currency-button" value="UAH">UAH</option>
+              <option class="currency-button" value="UGX">UGX</option>
+            </select>
+          </h3>
+        </div>
+      </div>
+
+      <div id="alerts">
+      </div>
+
+      <div id="ethCards" class="">
+      </div>
+
+      <div class="controls">
+        <div>
+          <input type="text" id="address" size="45"></input>
+          <button id="addAddress" type="button" class="btn btn-secondary">Add Address</button>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- BOOTSTRAP -->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+    <!-- END BOOTSTRAP -->
+
+    <!-- THIRD PARTY LIBS -->
+    <!-- for searchable dropdown -->
+    <script src="https://cdn.rawgit.com/infostreams/bootstrap-select/fd227d46de2afed300d97fd0962de80fa71afb3b/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- ethereum libs -->
+    <script src="js/web3.min.js"></script>
+
+    <!-- bignumber - ethereum uses this for ether values -->
+    <script src="js/bignumber.min.js"></script>
+
+    <!-- For query string params -->
+    <script src="js/jquery.query-object.js"></script>
+
+    <!-- adds events to elements as they're created -->
+    <script src="js/jquery.initialize.min.js"></script>
+
+    <!-- to generate qr codes -->
+    <script src="js/qrcode.min.js"></script>
+    <!-- END THIRD PARTY LIBS -->
+
+    <!-- Contains ABIs for Token Contracts -->
+    <script src="js/walletBalances.js"></script>
+    <script src="js/tokenContracts.js"></script>
+
+    <script>
+
+      var addAlertMessage = function(message, severity, selector){
+        html=`<div class="alert alert-`+severity+` alert-dismissible fade show" role="alert">
+          `+message+`
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>`
+        $(selector).append(html);
+      }
+
+      var getExchangeCurrency = function(){
+      }
+
+      var getOtherAccounts = function(){
+        var a = $.query.get('a');
+        if(a !== "") { a = a.split('|') };
+        console.log('(getOtherAccounts) found '+ a.length + ' other accounts: ' + a);
+        return a;
+      }
+
+      // generate qr codes for easy sends
+      // this will add the click listener whenever a eth-qr is created
+      // var qrModalImage = new QRCode('qrModalImage');
+      // var qrBtnImages = {};
+      // $.initialize('.eth-qr', function() {
+      //   var id = $(this).attr('id');
+      //   var acct = $(this).attr('id').split('-')[2];
+      //
+      //   // console.log('creating small qr for '+acct);
+      //   // qrBtnImages[id] = new QRCode(id, {width: 75, height: 75});
+      //   // qrBtnImages[id].makeCode(acct);
+      //   $(this).find('img').click(function(){
+      //     console.log('making big qr for '+acct);
+      //     qrModalImage.makeCode(acct);
+      //     $('#qrModal').modal('toggle');
+      //   })
+      // });
+
+      // // add ethereum logo to cards
+      // $.initialize('.balance-card', function() {
+      //   console.log('adding ethereum logo to card...');
+      //   $(this).find('.card-block').prepend('<img src="img/logo-eth.svg" class="balance-card-logo" />');
+      // });
+
+      var accts = {
+        _accts: [],
+        _curr: 'BTC',
+        get: function() { return this._accts; },
+        add: function(x) {
+          if(typeof x === typeof "moo") { x = [x]; }
+          for(var i=0; i<x.length; i++){
+            // if it's not already in the array, add it
+            if(!this._accts.find(function(e){ return x[i] == e; })) {
+              console.log('(accts.add) '+x[i]+' not found in accts, adding...');
+              this._accts.push(x[i]);
+              this.update([x[i]]);
+            }
+          }
+          if($.query.get('a') != this._accts.join('|')){
+            window.location.search = $.query.set('a', this._accts.join('|'));
+          }
+        },
+        join: function(sep) { return this._accts.join(sep); },
+        update: function(x=false) {
+          var a = [];
+          if(x) { a = x; }
+          else { a = this._accts; }
+          console.log('(accts.update) getting wallet balances for accounts: '+a);
+          walletBalances(a, tokenContracts, '#ethCards', '#tokens', '#ethTotal');
+          // getEthPrice(this._curr, '#exchangeTotal', '#exchangePrice');
+        },
+        get currency() { return this._curr; },
+        set currency(c) {
+          if($.query.get('c') != c) {
+            window.location.search = $.query.set('c', c);
+          }
+
+          if($('#currencies').val() != c) {
+            $('#currencies').val(c);
+          }
+
+          if(this._curr == c) {
+            console.log('(add.currency) original and target currencies are the same');
+            return;
+          }
+
+          console.log('(add.currency) switching to ' + c);
+          this._curr = c;
+          this.update();
+        }
+      }
+
+      /************************************************************************
+      * EVENTS
+      ************************************************************************/
+      $('#addAddress').click(function(){
+        var a = getOtherAccounts();
+        accts.add([$('#address').val()]);
+        $('#address').val('');
+      });
+
+      // update exchange summary whenever eth total changes
+      $.initialize('#ethTotal', function() {
+        $(this).change(function(){
+          getEthPrice(accts.currency, '#exchangeTotal', '#exchangePrice');
+        });
+      });
+
+      $(document).ready(function() {
+        // check for metamask
+        if (typeof web3 !== 'undefined') {
+          // Use Mist/MetaMask's provider
+          web3js = new Web3(web3.currentProvider);
+          console.log('metamask found');
+        } else {
+          var nodeAddr = "http://localhost:8545";
+          console.log('No metamask found, falling back to local node: '+nodeAddr)
+          addAlertMessage('Cannot find MetaMask, attempting to connect to a local node at '+nodeAddr+'...', 'warning', '#alerts');
+          // fallback
+          web3js = new Web3(new Web3.providers.HttpProvider(nodeAddr));
+        }
+
+        // set currency from url string, if applicable
+        var cur = $.query.get('c');
+        if (cur) {
+          cur = cur.toUpperCase();
+          console.log('(init) setting currency: ' + cur);
+          accts.currency = cur;
+        }
+
+        // update exchange summary anytime the currency changes
+        $('#currencies').change(function() { accts.currency = $(this).val(); });
+
+        // get accts from url string
+        var othaccts = getOtherAccounts();
+        if(othaccts) {
+          console.log('found '+othaccts.length+' stored accounts: '+othaccts);
+          accts.add(othaccts);
+        }
+
+        // get accts from metamask
+        var mmaccts = new Array(web3js.eth.getAccounts(function(e, r){
+          if(r) {
+            console.log('found '+r.length+' metamask accounts: '+r);
+            accts.add(r);
+          }
+        }));
+      });
+
+    </script>
+  </body>
+</html>
