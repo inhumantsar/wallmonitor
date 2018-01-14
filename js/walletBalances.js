@@ -51,18 +51,28 @@ var logEthBalance = function(address, balance, ethSelector){
 
   // generate html
   var html = `<div class="card balance-card">
-    <div class="card-block">
-      <div class="balance-card-logo"><img src="img/logo-eth.svg" /></div>
-      <div>
-        <p class="eth-address">`+address+`</p>
-        <ul class="list-unstyled eth-balances" id="eth-balances-`+address+`">
-          <li class="eth-balances-eth">`+balance+` &#926;</li>
-        <ul>
+    <div class="card-header">
+      <img class="balance-card-logo" src="img/logo-eth.svg" />
+      <h5>
+        `+roundTo(balance, 12)+` &#926;
+      </h5>
+    </div>
+    <div class="card-body">
+      <div class="balance-card-details">
+        <small>
+          <ul class="list-unstyled eth-balances" id="eth-balances-`+address+`">
+          </ul>
+        </small>
       </div>
+    </div>
+    <div class="eth-address card-footer text-muted">
+      <small>
+        Address: <a class="card-footer-data" href="https://etherscan.io/address/`+address+`">`+address+`</a><br />
+      </small>
     </div>
   </div>`;
 
-  $(ethSelector).append(html);
+  $(ethSelector).prepend(html);
 }
 
 var updateExchangeTotal = function(minor, price, totalSelector, priceSelector) {
@@ -81,7 +91,7 @@ var updateExchangeTotal = function(minor, price, totalSelector, priceSelector) {
     total = roundTo(total, 2);
   }
   $(totalSelector).html(total);
-  $(priceSelector).html('@ '+price+'/ETH');
+  $(priceSelector).html(price);
 }
 
 var updateEthTotal = function(addition, ethTotalSelector){
@@ -103,8 +113,10 @@ var getEthBalance = function(address, ethSelector, ethTotalSelector){
 }
 
 var logTokens = function(name, userAddress, balance, tokenSelector) {
-  console.log('(token)' + userAddress + ": " + balance + ' ' + name);
-  $(tokenSelector).append('<li class="eth-balances-ck">'+balance+' ' + name + '</li>');
+  console.log('(logTokens) ' + userAddress + ": " + balance + ' ' + name);
+  if(balance != 0) {
+    $(tokenSelector).append('<li class="eth-balances-ck">'+balance+' ' + name + '</li>');
+  }
 }
 
 var logTokenContracts = function(contracts, userAddress, tokenSelector) {

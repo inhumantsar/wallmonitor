@@ -4,86 +4,8 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Mono" rel="stylesheet">
 
-    <!-- for searchable dropdowns -->
-    <link rel="stylesheet" href="https://cdn.rawgit.com/infostreams/bootstrap-select/fd227d46de2afed300d97fd0962de80fa71afb3b/dist/css/bootstrap-select.min.css" />
+    <link rel="stylesheet" href="css/style.css" />
 
-
-    <style>
-    body .container {
-      width: 35em;
-    }
-    .balance-card {
-      width: 35em;
-      /*min-width: 550px;*/
-      margin: .5em auto;
-    }
-    .balance-card .card-block {
-      display: flex;
-      justify-content: space-evenly;
-      font-family: "Roboto";
-    }
-    .balance-card .card-block div {
-      /*width: 90%;
-      margin: auto 1em;*/
-    }
-    .balance-card .eth-address {
-      margin: .5em auto;
-      font-family: "Roboto Mono";
-    }
-    .balance-card-logo {
-      margin: auto 0;
-      text-align: center;
-    }
-    .balance-card-logo img {
-      height: 4em;
-    }
-    .eth-qr {
-      margin: auto .5em;
-    }
-    .eth-address {}
-
-    #qrModal {
-      width: 300px;
-      height: auto;
-      margin: auto;
-    }
-    #qrModal .modal-body {
-      text-align: center;
-    }
-    #summary {
-      display: flex;
-      justify-content: space-evenly;
-      margin: 2em auto 0 auto;
-      text-align: center;
-    }
-    #summary div {
-      margin: 0 0 0 2em;
-    }
-    .controls {
-    }
-    .controls button {
-      font-size: .8em;
-      padding: .2em .5em;
-    }
-    .dropdown-menu {
-      font-size: 1em;
-    }
-
-    .exchangeSummary {
-      /*display: flex;
-      justify-content: space-around;*/
-    }
-
-    .exchangeSummary small, .exchangeSummary select {
-      font-size: .8rem;
-      display: inline;
-    }
-    .exchangeSummary select {
-      height: 1.4em;
-      line-height: 1em;
-    }
-
-    </style>
   </head>
   <body>
 
@@ -110,8 +32,8 @@
         <div class="exchangeSummary">
           <h3>
             <span id="exchangeTotal">----.--</span><br />
-            <small id="exchangePrice">@ ----/ETH</small>
-            <select class="controls" id="currencies">
+            <small>@ <span id="exchangePrice">----</small>
+            <select class="controls custom-select custom-select-sm" id="currencies">
               <option class="currency-button" value="BTC">BTC</option>
               <option disabled>&#9472;&#9472;&#9472;</option>
               <option class="currency-button" value="AUD">AUD</option>
@@ -264,24 +186,30 @@
               <option class="currency-button" value="UAH">UAH</option>
               <option class="currency-button" value="UGX">UGX</option>
             </select>
+            <small>/ETH</small>
           </h3>
         </div>
       </div>
 
-      <div id="alerts">
-      </div>
+      <div id="alerts"></div>
 
-      <div id="ethCards" class="">
+      <div id="ethCards" class="card-columns">
       </div>
 
       <div class="controls">
         <div>
-          <input type="text" id="address" size="45"></input>
+          <input type="text" id="address"></input>
           <button id="addAddress" type="button" class="btn btn-secondary">Add Address</button>
         </div>
       </div>
     </div>
 
+    <footer class="footer">
+      <div class="container text-muted">
+          &#x1f341; &copy; 2018 shaun martin.
+          <a href="https://github.com/inhumantsar/wallmonitor.git">open source software</a> &#x1f341;
+      </div>
+    </footer>
 
     <!-- BOOTSTRAP -->
     <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
@@ -323,9 +251,6 @@
           </button>
         </div>`
         $(selector).append(html);
-      }
-
-      var getExchangeCurrency = function(){
       }
 
       var getOtherAccounts = function(){

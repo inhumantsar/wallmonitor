@@ -1,0 +1,116 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 2em; /* Margin bottom by footer height */
+}
+.footer {
+  font-size: .6em;
+  text-align: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2em; /* Set the fixed height of the footer here */
+  line-height: 2em; /* Vertically center the text there */
+}
+
+body .container{
+  min-width: 355px;
+  width: 95%;
+}
+
+.card-columns {
+ column-count: 1;
+ column-gap: .75rem;
+}
+@media (min-width: 576px){
+  .card-columns {
+    column-count: 2;
+  }
+}
+
+.balance-card .eth-address {
+  margin: 0;
+  font-family: "Roboto Mono";
+  font-size: .8em;
+}
+
+.card-header {
+  height: 2em;
+  padding: .2em .5em;
+  display: flex;
+  justify-content: space-between;
+}
+.card-header h5 {
+  padding: .2em auto 0 auto;
+}
+.balance-card-logo {
+  height: 1.5em;
+  margin: auto 0;
+}
+.card-footer {
+  padding: .3em .5em;
+}
+.card-footer-data { color: #333; }
+.eth-address a, .footer a {
+  color: #666;
+  text-decoration: underline;
+}
+.eth-address a:hover, .footer a:hover {
+  color: #2a2a2a;
+  text-decoration: underline;
+}
+.balance-card .eth-balances,
+.balance-card .eth-balances li,
+.balance-card .eth-address {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.eth-qr {
+  margin: auto .5em;
+}
+#qrModal {
+  width: 300px;
+  height: auto;
+  margin: auto;
+}
+#qrModal .modal-body {
+  text-align: center;
+}
+#summary {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 2em auto 0 auto;
+  text-align: center;
+}
+#summary div {
+  margin: 0 0 0 2em;
+}
+.controls {
+  margin: .5em auto;
+}
+.controls button {
+  font-size: .8em;
+  padding: .2em .5em;
+}
+
+.custom-select {
+  font-size: .8em;
+  width: 4em;
+  height: 1.4em;
+  line-height: 1em;
+  padding: .2em .4em;
+  margin: .5em auto 0 auto;
+  background-position: 90% center;
+}
+.exchangeSummary {
+  /*display: flex;
+  justify-content: space-around;*/
+}
+
+.exchangeSummary small, .exchangeSummary select {
+  font-size: .8rem;
+  display: inline;
+}
