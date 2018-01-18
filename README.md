@@ -35,7 +35,10 @@ Note: There is a risk that someone could intercept your Ethereum wallet addresse
 
 ### "Offline"
 1. Download or clone the repo to someplace memorable.
-2. Open `index.html` in your browser.
-3. Set your desired exchange currency.
-4. Add your wallet addresses.
-5. Bookmark the page for future reference.
+2. Change to the directory and run a webserver there. eg:
+  * `python3 -m http.server`
+  * `docker build -t wm && docker run --rm -p 8000:80 wm`
+3. Open http://127.0.0.1:8000/index.html in your browser.
+4. Set your desired exchange currency.
+5. Add your wallet addresses.
+6. Bookmark the page for future reference.

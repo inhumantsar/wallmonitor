@@ -49,26 +49,28 @@ var logEthBalance = function(address, balance, ethSelector){
   // check to see if this has already been added
   if($('#'+id).length > 0) { return; }
 
+  bodyid = 'balance-card-details-'+address;
+
   // generate html
   var html = `<div class="card balance-card">
     <div class="card-header">
-      <img class="balance-card-logo" src="img/logo-eth.svg" />
+      <small>
+        <img class="balance-card-logo" src="img/logo-eth.svg" />
+        <a class="eth-address text-muted" href="https://etherscan.io/address/`+address+`">`+address+`</a>
+      </small>
       <h5>
-        `+roundTo(balance, 12)+` &#926;
+        `+roundTo(balance, 10)+` &#926; 
+        <a class="text-muted" data-toggle="collapse" data-parent="`+ethSelector+`" href="#`+bodyid+`" role="button" aria-expanded="true" aria-controls="`+bodyid+`">+</a>
       </h5>
     </div>
-    <div class="card-body">
+    <div class="card-body collapse hide" id="`+bodyid+`">
       <div class="balance-card-details">
+        <p>Token Balances</p>
         <small>
           <ul class="list-unstyled eth-balances" id="eth-balances-`+address+`">
           </ul>
         </small>
       </div>
-    </div>
-    <div class="eth-address card-footer text-muted">
-      <small>
-        Address: <a class="card-footer-data" href="https://etherscan.io/address/`+address+`">`+address+`</a><br />
-      </small>
     </div>
   </div>`;
 

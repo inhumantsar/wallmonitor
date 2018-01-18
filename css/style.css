@@ -24,34 +24,46 @@ body .container{
  column-count: 1;
  column-gap: .75rem;
 }
-@media (min-width: 576px){
+@media (min-width: 1000px){
   .card-columns {
     column-count: 2;
   }
 }
 
+.balance-card {
+  margin: .5em 0;
+  min-width: 20em;
+}
 .balance-card .eth-address {
   margin: 0;
   font-family: "Roboto Mono";
   font-size: .8em;
 }
 
-.card-header {
+.balance-card .card-header {
   height: 2em;
   padding: .2em .5em;
   display: flex;
   justify-content: space-between;
 }
-.card-header h5 {
+
+.balance-card .card-header h5 {
   padding: .2em auto 0 auto;
 }
+
+.balance-card .card-header h5 a {
+  text-decoration: none;
+}
+
 .balance-card-logo {
   height: 1.5em;
   margin: auto 0;
 }
+
 .card-footer {
   padding: .3em .5em;
 }
+
 .card-footer-data { color: #333; }
 .eth-address a, .footer a {
   color: #666;
